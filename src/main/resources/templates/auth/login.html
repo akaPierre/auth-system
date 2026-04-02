@@ -1,0 +1,99 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Auth System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="auth-wrapper">
+      <div class="auth-card">
+        <div class="auth-header">
+          <a href="#" class="logo">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect width="28" height="28" rx="6" fill="#01696f" />
+              <path
+                d="M14 7a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 10c4.418 0 8 1.79 8 4v1H6v-1c0-2.21 3.582-4 8-4z"
+                fill="white"
+              />
+            </svg>
+            Auth System
+          </a>
+          <h1>Bem-vindo de volta</h1>
+          <p>Entre com suas credenciais para acessar</p>
+        </div>
+
+        <div
+          class="alert alert-success"
+          th:if="${successMessage}"
+          th:text="${successMessage}"
+        ></div>
+
+        <div class="alert alert-error" th:if="${param.error}">
+          E-mail ou senha inválidos. Tente novamente.
+        </div>
+
+        <div class="alert alert-warning" th:if="${param.expired}">
+          Sua sessão foi encerrada porque você acessou de outro dispositivo.
+        </div>
+
+        <div class="alert alert-success" th:if="${param.logout}">
+          Logout realizado com sucesso.
+        </div>
+
+        <form th:action="@{/login}" method="post" novalidate>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="seu@email.com"
+              autocomplete="email"
+              required
+              autofocus
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+
+        <hr class="divider" />
+
+        <div class="auth-footer">
+          Não tem uma conta ?
+          <a th:href="@{/register}">Cadastre-se</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

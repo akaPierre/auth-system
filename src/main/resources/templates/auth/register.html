@@ -1,0 +1,136 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro - Auth System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="auth-wrapper">
+      <div class="auth-card">
+        <div class="auth-header">
+          <a th:href="@{/login}" class="logo">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect width="28" height="28" rx="6" fill="#01696f" />
+              <path
+                d="M14 7a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 10c4.418 0 8 1.79 8 4v1H6v-1c0-2.21 3.582-4 8-4z"
+                fill="white"
+              />
+            </svg>
+            Auth System
+          </a>
+          <h1>Criar conta</h1>
+          <p>Preencha os dados abaixo para se cadastrar</p>
+        </div>
+
+        <div
+          class="alert alert-error"
+          th:if="${errorMessage}"
+          th:text="${errorMessage}"
+        ></div>
+
+        <form
+          th:action="@{/register}"
+          th:object="${registrationDto}"
+          method="post"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="name">Nome completo</label>
+            <input
+              type="text"
+              id="name"
+              th:field="*{name}"
+              th:classappend="${#fields.hasErrors('name')} ? 'input-error'"
+              placeholder="Seu nome"
+              autocomplete="name"
+              autofocus
+            />
+            <span
+              class="field-error"
+              th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}"
+            ></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              th:field="*{email}"
+              th:classappend="${#fields.hasErrors('email')} ? 'input-error'"
+              placeholder="seu@email.com"
+              autocomplete="email"
+            />
+            <span
+              class="field-error"
+              th:if="${#fields.hasErrors('email')}"
+              th:errors="*{email}"
+            ></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <input
+              type="password"
+              id="password"
+              th:field="*{password}"
+              th:classappend="${#fields.hasErrors('password')} ? 'input-error'"
+              placeholder="Mínimo 8 caracteres"
+              autocomplete="new-password"
+            />
+            <span
+              class="field-error"
+              th:if="${#fields.hasErrors('password')}"
+              th:errors="*{password}"
+            ></span>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmar senha</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              th:field="*{confirmPassword}"
+              th:classappend="${#fields.hasErrors('confirmPassword')} ? 'input-error'"
+              placeholder="Repita a senha"
+              autocomplete="new-password"
+            />
+            <span
+              class="field-error"
+              th:if="${#fields.hasErrors('confirmPassword')}"
+              th:errors="*{confirmPassword}"
+            ></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Criar conta</button>
+        </form>
+
+        <hr class="divider" />
+
+        <div class="auth-footer">
+          Já tem uma conta ?
+          <a th:href="@{/login}">Fazer login</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

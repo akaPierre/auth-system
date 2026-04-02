@@ -1,0 +1,72 @@
+<!doctype html>
+<html
+  lang="pt-BR"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Auth System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <header class="app-header">
+        <a th:href="@{/admin/home}" class="logo"> Auth System </a>
+
+        <div class="header-user">
+          <span>Olá, <strong sec:authentication="name"></strong></span>
+          <span class="role-badge admin">Admin</span>
+
+          <form th:action="@{/logout}" method="post" style="margin: 0">
+            <button type="submit" class="btn btn-danger">Sair</button>
+          </form>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <h1 class="page-title">Painel Administrativo</h1>
+        <p class="page-subtitle">
+          Você está autenticado como administrador do sistema.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>E-mail</h3>
+            <p th:text="${username}">admin@sistema.com</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Perfil de acesso</h3>
+            <p>
+              <span class="role-badge admin" th:text="${userRole}"
+                >Administrador</span
+              >
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3>Status da sessão</h3>
+            <p>✅ Ativa e autenticada</p>
+          </div>
+        </div>
+
+        <div class="admin-panel" sec:authorize="hasRole('ROLE_ADMIN')">
+          <h2>⚙️ Área restrita — Administrador</h2>
+          <p>
+            Esta seção é visível apenas para usuários com perfil de
+            administrador. Aqui você pode gerenciar usuários, configurações e
+            relatórios do sistema.
+          </p>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
