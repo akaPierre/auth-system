@@ -1,33 +1,50 @@
-HELP.md
+# Segurança
+.env
+application-prod.properties
+*.jks
+*.p12
+*.pem
+data/
+*.mv.db
+
+# Maven
 target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Java
+*.class
+*.log
+*.hprof
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+# Spring Boot
+uploads/
+jacoco.exec
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+# VSCode
 .vscode/
+
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Temp
+*.tmp
+*.swp
+.cache/
