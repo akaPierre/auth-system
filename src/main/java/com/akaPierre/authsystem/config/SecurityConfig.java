@@ -102,8 +102,8 @@ public class SecurityConfig {
                 .contentSecurityPolicy(csp -> csp
                     .policyDirectives(
                         "default-src 'self'; " +
-                        "script-src 'self' 'unsafe-inline'; " +   // 🔥 necessário pro H2
-                        "style-src 'self' 'unsafe-inline'; " +    // 🔥 necessário pro H2
+                        "script-src 'self' 'unsafe-inline'; " +
+                        "style-src 'self' 'unsafe-inline'; " +
                         "img-src 'self' data:; " +
                         "font-src 'self'; " +
                         "frame-ancestors 'self'"
